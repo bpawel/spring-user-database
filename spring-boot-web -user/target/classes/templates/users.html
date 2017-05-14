@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head lang="en">
+
+    <title>Spring</title>
+    <link rel="stylesheet" type="text/css" href="../static/style.css" />
+    <!--/*/ <th:block th:include="fragments/headerinc :: head"></th:block> /*/-->
+</head>
+<body>
+<!--/*/ <th:block th:include="header :: header"></th:block> /*/-->
+<div class="container">
+
+    <div th:if="${not #lists.isEmpty(users)}">
+
+        <table class="table table-striped">
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Surname</th>
+                <th>Age</th>
+                <th>Email</th>
+                <th sec:authorize="hasAnyAuthority('USER','ADMIN')">View</th>
+                <th sec:authorize="hasAuthority('ADMIN')">Edit</th>
+                <th sec:authorize="hasAuthority('ADMIN')">Delete</th>
+            </tr>
+            <tr th:each="user : ${users}">
+                <td th:text="${user.id}"><a href="/user/${user.id}">Id</a></td>
+                <td th:text="${user.name}">Name</td>
+                <td th:text="${user.surname}">Surname</td>
+                <td th:text="${user.age}">Age</td>
+                <td th:text="${user.email}">Email</td>
+                <td sec:authorize="hasAnyAuthority('USER','ADMIN')"><a class="btn btn-success" th:href="${'/user/' + user.id}">View</a></td>
+                <td sec:authorize="hasAuthority('ADMIN')"><a class="btn btn-success" th:href="${'/user/edit/' + user.id}">Edit</a></td>
+                <td sec:authorize="hasAuthority('ADMIN')"><a class="btn btn-danger" th:href="${'/user/delete/' + user.id}">Delete</a></td>
+            </tr>
+        </table>
+    </div>
+    <form th:action="@{/logout}" method="post">
+        <div class="col-sm-2" style="padding-top: 30px;">
+                <span sec:authorize="isAuthenticated()">
+                    <input type="submit" class="btn btn-default" value="Log Out"/>
+                </span>
+        </div>
+    </form>
+</div>
+
+<hr/>
+<footer class="footer text-center">
+    <div class="container">
+        <p>Projekt &copy; Paweł Baluk</p>
+    </div>
+</footer>
+</body>
+</html>

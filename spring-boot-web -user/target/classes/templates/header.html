@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head lang="en">
+
+</head>
+<body>
+
+    <div th:fragment="header">
+
+        <nav class="navbar navbar-default navbar-fixed-top" style="padding: 10px 0px;">
+        <div class="container">
+
+            <a class="btn btn-success" href="#" th:href="@{/users}">Users</a>
+            <a class="btn btn-success" href="#" th:href="@{/user/new}" sec:authorize="hasAuthority('ADMIN')">Create User</a>
+            <a class="btn btn-success" href="#" th:href="@{/login}">Sign In</a>
+
+        </div>
+        </nav>
+
+        <div class="text-center">
+
+            <h2>Baza danych - użytkownicy</h2>
+            <div class="welcome">
+                <span sec:authorize="isAuthenticated()">Welcome <span sec:authentication="name"></span></span>
+            </div>
+        </div>
+
+
+
+    </div>
+
+</body>
+</html>

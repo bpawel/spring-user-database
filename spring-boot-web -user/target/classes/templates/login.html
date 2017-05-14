@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Spring</title>
+    <link rel="stylesheet" type="text/css" href="../static/style.css" />
+    <!--/*/ <th:block th:include="fragments/headerinc :: head"></th:block> /*/-->
+
+</head>
+<body>
+
+<div class="container">
+    <!--/*/ <th:block th:include="header :: header"></th:block> /*/-->
+    <div th:if="${param.error}">
+        <label style="color:red">Invalid username and password.</label>
+    </div>
+    <div th:if="${param.logout}">
+        <label>
+            You have been logged out.
+        </label>
+    </div>
+
+    <!--<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+        <form th:action="@{/login}" method="post">
+
+            <table class="table table-striped">
+                <tr>
+                    <td><label> User Name : <input type="text" name="username"/> </label></td>
+                </tr>
+                <tr>
+                    <td><label> Password : <input type="password" name="password"/> </label></td>
+                </tr>
+                <tr>
+                    <td> <button type="submit" class="btn btn-default" href="#" th:action="@{/users}">Log In</button></td>
+                </tr>
+            </table>
+
+        </form>
+    </div>-->
+
+    <form class="form-horizontal" th:action="@{/login}" method="post">
+        <div class="form-group">
+            <label  class="col-sm-2 control-label">Username</label>
+
+                <div class="col-sm-4">
+                <input type="text" name="username" class="form-control" id="inputEmail3" placeholder="Username"/>
+
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="inputPassword3" class="col-sm-2 control-label">Password</label>
+            <div class="col-sm-4">
+                <input type="password" name="password" class="form-control" id="inputPassword3" placeholder="Password"/>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-sm-offset-2 col-sm-10">
+                <button type="submit" class="btn btn-default">Sign in</button>
+            </div>
+        </div>
+    </form>
+
+</div>
+<hr/>
+    <footer class="footer text-center">
+        <div class="container">
+            <p>Projekt &copy; Paweł Baluk</p>
+        </div>
+    </footer>
+
+</body>
+</html>
